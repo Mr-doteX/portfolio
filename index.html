@@ -1,34 +1,54 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agyei | Professional Portfolio</title>
+    <title>Xvien | Portfolio</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
     <!-- FontAwesome for professional icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="style.js" defer> </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap');
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* Slate 50 */
-            color: #0f172a; /* Slate 900 */
+            background-color: #f8fafc;
+            color: #0f172a;
         }
+
+        #animeGlobe {
+            top: 0;
+            left: 0;
+            position: fixed;
+            z-index: -1;
+            width: 100%;
+            height: 100vh;
+        }
+
         .font-mono {
             font-family: 'JetBrains Mono', monospace;
         }
+
         /* Smooth scale hover effects for interactive elements */
         .card-hover {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         @media (min-width: 768px) {
             .card-hover:hover {
                 transform: translateY(-4px);
                 box-shadow: 0 12px 20px -8px rgba(15, 23, 42, 0.08);
-                border-color: #94a3b8; /* Slate 400 */
+                border-color: #94a3b8;
             }
         }
+
         /* Mobile menu transitions */
         #mobile-menu {
             transition: max-height 0.3s ease-in-out, opacity 0.2s ease-in-out;
@@ -36,6 +56,7 @@
             opacity: 0;
             overflow: hidden;
         }
+
         #mobile-menu.open {
             max-height: 400px;
             opacity: 1;
@@ -46,17 +67,20 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#0f172a', /* Slate 900 */
-                        secondary: '#475569', /* Slate 600 */
-                        accent: '#1e293b', /* Slate 800 */
-                        borderMuted: '#e2e8f0', /* Slate 200 */
+                        primary: '#0f172a',
+                        secondary: '#475569',
+                        accent: '#1e293b',
+                        borderMuted: '#e2e8f0',
                         cardBg: '#ffffff'
                     }
                 }
             }
         }
     </script>
+
+
 </head>
+
 <body class="antialiased selection:bg-slate-800 selection:text-white bg-slate-50 text-slate-900 overflow-x-hidden">
 
     <!-- Navigation Header -->
@@ -64,30 +88,46 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <!-- Logo -->
-                <a href="#overview" class="font-extrabold text-xl tracking-wider text-slate-900 hover:opacity-80 transition-opacity">AGYEI.</a>
-                
+                <a href="#overview"
+                    class="font-extrabold text-xl tracking-wider text-slate-900 hover:opacity-80 transition-opacity">XVIEN.</a>
+
                 <!-- Desktop Navigation Links -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-1 lg:space-x-4">
-                        <a href="#overview" class="text-slate-600 hover:text-slate-950 transition-colors px-3 py-2 text-sm font-semibold">Overview</a>
-                        <a href="#software" class="text-slate-600 hover:text-slate-950 transition-colors px-3 py-2 text-sm font-semibold">Software Architecture</a>
-                        <a href="#hr" class="text-slate-600 hover:text-slate-950 transition-colors px-3 py-2 text-sm font-semibold">HR Operations</a>
-                        <a href="#audio" class="text-slate-600 hover:text-slate-950 transition-colors px-3 py-2 text-sm font-semibold">Audio Production</a>
-                        <a href="#arsenal" class="text-slate-600 hover:text-slate-950 transition-colors px-3 py-2 text-sm font-semibold">Technical Arsenal</a>
+                        <a href="#overview"
+                            class="text-slate-600 hover:text-slate-950 transition-colors px-3 py-2 text-sm font-semibold">Overview</a>
+                        <a href="#software"
+                            class="text-slate-600 hover:text-slate-950 transition-colors px-3 py-2 text-sm font-semibold">Software
+                            Development</a>
+                        <a href="#hr"
+                            class="text-slate-600 hover:text-slate-950 transition-colors px-3 py-2 text-sm font-semibold">HR
+                            Operations</a>
+                        <a href="#audio"
+                            class="text-slate-600 hover:text-slate-950 transition-colors px-3 py-2 text-sm font-semibold">Audio
+                            Production</a>
+                        <a href="#arsenal"
+                            class="text-slate-600 hover:text-slate-950 transition-colors px-3 py-2 text-sm font-semibold">Technical
+                            Skills</a>
                     </div>
                 </div>
 
                 <!-- Mobile Hamburger Menu Button -->
                 <div class="md:hidden">
-                    <button id="menu-btn" type="button" class="inline-flex items-center justify-center p-2 rounded-lg text-slate-600 hover:text-slate-950 hover:bg-slate-100 focus:outline-none transition-all" aria-controls="mobile-menu" aria-expanded="false">
+                    <button id="menu-btn" type="button"
+                        class="inline-flex items-center justify-center p-2 rounded-lg text-slate-600 hover:text-slate-950 hover:bg-slate-100 focus:outline-none transition-all"
+                        aria-controls="mobile-menu" aria-expanded="false">
                         <span class="sr-only">Open main menu</span>
                         <!-- Hamburger Icon -->
-                        <svg id="hamburger-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        <svg id="hamburger-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                         <!-- Close Icon (hidden by default) -->
-                        <svg id="close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        <svg id="close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
                 </div>
@@ -97,55 +137,73 @@
         <!-- Mobile Menu (Collapsible dropdown) -->
         <div class="md:hidden px-4 pt-2 pb-4 bg-white border-b border-slate-200" id="mobile-menu">
             <div class="space-y-1 px-2 pb-3 pt-2">
-                <a href="#overview" class="mobile-nav-link block px-3 py-3 rounded-lg text-base font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-950 transition">Overview</a>
-                <a href="#software" class="mobile-nav-link block px-3 py-3 rounded-lg text-base font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-950 transition">Software Architecture</a>
-                <a href="#hr" class="mobile-nav-link block px-3 py-3 rounded-lg text-base font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-950 transition">HR Operations</a>
-                <a href="#audio" class="mobile-nav-link block px-3 py-3 rounded-lg text-base font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-950 transition">Audio Production</a>
-                <a href="#arsenal" class="mobile-nav-link block px-3 py-3 rounded-lg text-base font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-950 transition">Technical Arsenal</a>
+                <a href="#overview"
+                    class="mobile-nav-link block px-3 py-3 rounded-lg text-base font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-950 transition">Home</a>
+                <a href="#software"
+                    class="mobile-nav-link block px-3 py-3 rounded-lg text-base font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-950 transition">Software Dev.</a>
+                <a href="#hr"
+                    class="mobile-nav-link block px-3 py-3 rounded-lg text-base font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-950 transition">HR Operations</a>
+                <a href="#audio"
+                    class="mobile-nav-link block px-3 py-3 rounded-lg text-base font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-950 transition">Audio Production</a>
+                <a href="#arsenal"
+                    class="mobile-nav-link block px-3 py-3 rounded-lg text-base font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-950 transition">Technical Skills</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <header id="overview" class="pt-24 pb-12 md:pt-36 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col justify-center min-h-[90vh]">
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-300 text-[11px] sm:text-xs font-mono text-slate-700 w-fit mb-6 font-semibold shadow-sm">
+    <header id="overview"
+        class="pt-24 pb-12 md:pt-36 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col justify-center min-h-[90vh]">
+        <div id="animeGlobe"></div>
+        <div
+            class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-300 text-[11px] sm:text-xs font-mono text-slate-700 w-fit mb-6 font-semibold shadow-sm">
             <i class="fas fa-map-marker-alt text-slate-500"></i> Sihanoukville, Cambodia
         </div>
-        
+
         <h1 class="text-3xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-4 text-slate-900 leading-tight">
-            Hello, I'm <span class="text-slate-700">Agyei</span>
+            Hello, I'm <span class="text-slate-700">Xvien</span>
         </h1>
-        
+
         <h2 class="text-lg sm:text-xl md:text-2xl text-slate-600 font-medium mb-6 max-w-3xl leading-relaxed">
-            Enterprise Systems Architect 
-            <span class="hidden sm:inline text-slate-300 mx-2">|</span> 
+            Systems Architect
+            <span class="hidden sm:inline text-slate-300 mx-2">|</span>
             <br class="sm:hidden" />
-            HR Operations Lead 
-            <span class="hidden sm:inline text-slate-300 mx-2">|</span> 
+            HR Operations Lead
+            <span class="hidden sm:inline text-slate-300 mx-2">|</span>
             <br class="sm:hidden" />
             Technical Audio Producer
         </h2>
 
-        <div class="bg-white border border-slate-200 rounded-xl p-5 sm:p-6 md:p-8 max-w-4xl shadow-sm mb-8 relative overflow-hidden">
+        <div
+            class="bg-white border border-slate-200 rounded-xl p-5 sm:p-6 md:p-8 max-w-4xl shadow-sm mb-8 relative overflow-hidden">
             <div class="absolute top-0 left-0 w-1.5 h-full bg-slate-800"></div>
-            <h3 class="text-xs font-bold font-mono text-slate-500 mb-2 uppercase tracking-widest">Portfolio Overview</h3>
+            <h3 class="text-xs font-bold font-mono text-slate-500 mb-2 uppercase tracking-widest">Portfolio Overview
+            </h3>
             <p class="text-slate-700 leading-relaxed text-base sm:text-lg">
-                This portfolio outlines a verified track record of execution across three distinct but complementary technical domains: Backend Software Engineering, Global HR Operations & Systems Integration, and Professional Audio/Media Production. It serves as a concrete record of "done work," demonstrating a unique capability to design, build, and troubleshoot complex organizational and technical structures from the ground up.
+                This portfolio outlines a verified track record of execution across three distinct but complementary
+                technical domains: Backend Software Engineering, Global HR Operations & Systems Integration, and
+                Professional Audio/Media Production. It serves as a concrete record of "done work," demonstrating a
+                unique capability to design, build, and troubleshoot complex organizational and technical structures
+                from the ground up.
             </p>
         </div>
 
         <!-- Responsive Flex/Grid for contact links -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 max-w-4xl font-mono text-xs sm:text-sm">
-            <a href="mailto:agyei22@gmail.com" class="flex items-center justify-center sm:justify-start gap-2.5 bg-white hover:bg-slate-100 text-slate-800 transition px-4 py-3.5 rounded-lg border border-slate-300 shadow-sm font-semibold">
+            <a href="mailto:agyei22@gmail.com"
+                class="flex items-center justify-center sm:justify-start gap-2.5 bg-white hover:bg-slate-100 text-slate-800 transition px-4 py-3.5 rounded-lg border border-slate-300 shadow-sm font-semibold">
                 <i class="fas fa-envelope text-slate-500 text-base"></i> agyei22@gmail.com
             </a>
-            <a href="tel:+85592544906" class="flex items-center justify-center sm:justify-start gap-2.5 bg-white hover:bg-slate-100 text-slate-800 transition px-4 py-3.5 rounded-lg border border-slate-300 shadow-sm font-semibold">
+            <a href="tel:+85592544906"
+                class="flex items-center justify-center sm:justify-start gap-2.5 bg-white hover:bg-slate-100 text-slate-800 transition px-4 py-3.5 rounded-lg border border-slate-300 shadow-sm font-semibold">
                 <i class="fas fa-phone text-slate-500 text-base"></i> +855 92 544 906
             </a>
-            <a href="https://linkedin.com" target="_blank" class="flex items-center justify-center sm:justify-start gap-2.5 bg-white hover:bg-slate-100 text-slate-800 transition px-4 py-3.5 rounded-lg border border-slate-300 shadow-sm font-semibold">
+            <a href="https://linkedin.com" target="_blank"
+                class="flex items-center justify-center sm:justify-start gap-2.5 bg-white hover:bg-slate-100 text-slate-800 transition px-4 py-3.5 rounded-lg border border-slate-300 shadow-sm font-semibold">
                 <i class="fab fa-linkedin text-slate-500 text-base"></i> LinkedIn Profile
             </a>
-            <a href="https://github.com" target="_blank" class="flex items-center justify-center sm:justify-start gap-2.5 bg-white hover:bg-slate-100 text-slate-800 transition px-4 py-3.5 rounded-lg border border-slate-300 shadow-sm font-semibold">
+            <a href="https://github.com" target="_blank"
+                class="flex items-center justify-center sm:justify-start gap-2.5 bg-white hover:bg-slate-100 text-slate-800 transition px-4 py-3.5 rounded-lg border border-slate-300 shadow-sm font-semibold">
                 <i class="fab fa-github text-slate-500 text-base"></i> GitHub Portfolio
             </a>
         </div>
@@ -155,67 +213,91 @@
     <section id="software" class="py-12 md:py-20 bg-slate-100 border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col sm:flex-row sm:items-center gap-4 mb-8 md:mb-12">
-                <div class="w-12 h-12 rounded-xl bg-slate-900 flex items-center justify-center shadow-md text-white text-xl flex-shrink-0">
+                <div
+                    class="w-12 h-12 rounded-xl bg-slate-900 flex items-center justify-center shadow-md text-white text-xl flex-shrink-0">
                     <i class="fas fa-code"></i>
                 </div>
                 <div>
                     <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900">Domain 1</h2>
-                    <p class="text-slate-600 font-mono text-xs sm:text-sm mt-0.5 font-semibold">Software Engineering & Systems Architecture</p>
+                    <p class="text-slate-600 font-mono text-xs sm:text-sm mt-0.5 font-semibold">Software Engineering &
+                        Systems Architecture</p>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
                 <!-- Project 1 -->
-                <div class="bg-white rounded-xl p-5 sm:p-6 md:p-8 border border-slate-200 shadow-sm card-hover transition-all duration-300 flex flex-col h-full">
+                <div
+                    class="bg-white rounded-xl p-5 sm:p-6 md:p-8 border border-slate-200 shadow-sm card-hover transition-all duration-300 flex flex-col h-full">
                     <div class="mb-4">
-                        <h3 class="text-lg sm:text-xl font-bold mb-2 text-slate-900 leading-snug">The "exTO" HRIS Framework</h3>
-                        <span class="inline-block px-3 py-1 bg-slate-100 text-slate-800 border border-slate-200 text-[11px] sm:text-xs font-mono font-bold rounded-full">Lead Developer & Backend Architect</span>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 text-slate-900 leading-snug">The "exTO" HRIS
+                            Framework</h3>
+                        <span
+                            class="inline-block px-3 py-1 bg-slate-100 text-slate-800 border border-slate-200 text-[11px] sm:text-xs font-mono font-bold rounded-full">Lead
+                            Developer & Backend Architect</span>
                     </div>
                     <div class="space-y-4 flex-grow text-slate-600 text-sm leading-relaxed">
                         <div>
                             <strong class="text-slate-900 block mb-1">The Objective:</strong>
-                            Engineer a proprietary, standalone HRIS blueprint to eliminate documentation gaps and secure distributed PII.
+                            Engineer a proprietary, standalone HRIS blueprint to eliminate documentation gaps and secure
+                            distributed PII.
                         </div>
                         <div>
                             <strong class="text-slate-900 block mb-1">The Execution:</strong>
                             <ul class="list-disc pl-5 space-y-1.5">
-                                <li>Built core application logic using native Node.js and Express.js, integrated with a MongoDB structural database.</li>
-                                <li>Hardened data pipelines writing custom RBAC middleware and enforcing AES-256 field-level encryption.</li>
-                                <li>Formulated predictive attrition models and automated global offboarding data ingestion channels.</li>
+                                <li>Built core application logic using native Node.js and Express.js, integrated with a
+                                    MongoDB structural database.</li>
+                                <li>Hardened data pipelines writing custom RBAC middleware and enforcing AES-256
+                                    field-level encryption.</li>
+                                <li>Formulated predictive attrition models and automated global offboarding data
+                                    ingestion channels.</li>
                             </ul>
                         </div>
                     </div>
                     <div class="mt-6 pt-4 border-t border-slate-200">
-                        <strong class="text-slate-900 block mb-1.5"><i class="fas fa-trophy text-slate-500 mr-2"></i>The Outcome</strong>
-                        <p class="text-sm text-slate-800 font-medium bg-slate-50 border border-slate-200 rounded-lg p-3">
-                            Successfully delivered a production-ready backend architecture that reduces manual workflow reconciliation time by 40% and guarantees a 0% drop in operational throughput during team transitions.
+                        <strong class="text-slate-900 block mb-1.5"><i class="fas fa-trophy text-slate-500 mr-2"></i>The
+                            Outcome</strong>
+                        <p
+                            class="text-sm text-slate-800 font-medium bg-slate-50 border border-slate-200 rounded-lg p-3">
+                            Successfully delivered a production-ready backend architecture that reduces manual workflow
+                            reconciliation time by 40% and guarantees a 0% drop in operational throughput during team
+                            transitions.
                         </p>
                     </div>
                 </div>
 
                 <!-- Project 2 -->
-                <div class="bg-white rounded-xl p-5 sm:p-6 md:p-8 border border-slate-200 shadow-sm card-hover transition-all duration-300 flex flex-col h-full">
+                <div
+                    class="bg-white rounded-xl p-5 sm:p-6 md:p-8 border border-slate-200 shadow-sm card-hover transition-all duration-300 flex flex-col h-full">
                     <div class="mb-4">
-                        <h3 class="text-lg sm:text-xl font-bold mb-2 text-slate-900 leading-snug">Enterprise Network & Cybersecurity Auditing</h3>
-                        <span class="inline-block px-3 py-1 bg-slate-100 text-slate-800 border border-slate-200 text-[11px] sm:text-xs font-mono font-bold rounded-full">Cybersecurity Consultant | Silver Rock</span>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 text-slate-900 leading-snug">Enterprise Network &
+                            Cybersecurity Auditing</h3>
+                        <span
+                            class="inline-block px-3 py-1 bg-slate-100 text-slate-800 border border-slate-200 text-[11px] sm:text-xs font-mono font-bold rounded-full">Cybersecurity
+                            Consultant | Silver Rock</span>
                     </div>
                     <div class="space-y-4 flex-grow text-slate-600 text-sm leading-relaxed">
                         <div>
                             <strong class="text-slate-900 block mb-1">The Objective:</strong>
-                            Eradicate structural network vulnerabilities and ensure 100% compliance with international Data Retention laws across distributed cloud servers.
+                            Eradicate structural network vulnerabilities and ensure 100% compliance with international
+                            Data Retention laws across distributed cloud servers.
                         </div>
                         <div>
                             <strong class="text-slate-900 block mb-1">The Execution:</strong>
                             <ul class="list-disc pl-5 space-y-1.5">
-                                <li>Directed comprehensive, code-level technical audits of the enterprise's people infrastructure.</li>
-                                <li>Designed and facilitated live, cross-functional technical training symposia to streamline transitions.</li>
+                                <li>Directed comprehensive, code-level technical audits of the enterprise's people
+                                    infrastructure.</li>
+                                <li>Designed and facilitated live, cross-functional technical training symposia to
+                                    streamline transitions.</li>
                             </ul>
                         </div>
                     </div>
                     <div class="mt-6 pt-4 border-t border-slate-200">
-                        <strong class="text-slate-900 block mb-1.5"><i class="fas fa-trophy text-slate-500 mr-2"></i>The Outcome</strong>
-                        <p class="text-sm text-slate-800 font-medium bg-slate-50 border border-slate-200 rounded-lg p-3">
-                            Successfully insulated the enterprise from cross-border data privacy liabilities (GDPR/HIPAA principles) through robust encryption governance.
+                        <strong class="text-slate-900 block mb-1.5"><i class="fas fa-trophy text-slate-500 mr-2"></i>The
+                            Outcome</strong>
+                        <p
+                            class="text-sm text-slate-800 font-medium bg-slate-50 border border-slate-200 rounded-lg p-3">
+                            Successfully insulated the enterprise from cross-border data privacy liabilities (GDPR/HIPAA
+                            principles) through robust encryption governance.
                         </p>
                     </div>
                 </div>
@@ -227,67 +309,90 @@
     <section id="hr" class="py-12 md:py-20 bg-white border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col sm:flex-row sm:items-center gap-4 mb-8 md:mb-12">
-                <div class="w-12 h-12 rounded-xl bg-slate-900 flex items-center justify-center shadow-md text-white text-xl flex-shrink-0">
+                <div
+                    class="w-12 h-12 rounded-xl bg-slate-900 flex items-center justify-center shadow-md text-white text-xl flex-shrink-0">
                     <i class="fas fa-users-cog"></i>
                 </div>
                 <div>
                     <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900">Domain 2</h2>
-                    <p class="text-slate-600 font-mono text-xs sm:text-sm mt-0.5 font-semibold">HR Operations, L&D & Systems Integration</p>
+                    <p class="text-slate-600 font-mono text-xs sm:text-sm mt-0.5 font-semibold">HR Operations, L&D &
+                        Systems Integration</p>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
                 <!-- Project 3 -->
-                <div class="bg-white rounded-xl p-5 sm:p-6 md:p-8 border border-slate-200 shadow-sm card-hover transition-all duration-300 flex flex-col h-full">
+                <div
+                    class="bg-white rounded-xl p-5 sm:p-6 md:p-8 border border-slate-200 shadow-sm card-hover transition-all duration-300 flex flex-col h-full">
                     <div class="mb-4">
-                        <h3 class="text-lg sm:text-xl font-bold mb-2 text-slate-900 leading-snug">Property-Wide Biometric Deployment</h3>
-                        <span class="inline-block px-3 py-1 bg-slate-100 text-slate-800 border border-slate-200 text-[11px] sm:text-xs font-mono font-bold rounded-full">HR Generalist & Tech Specialist | Marriott</span>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 text-slate-900 leading-snug">Property-Wide
+                            Biometric Deployment</h3>
+                        <span
+                            class="inline-block px-3 py-1 bg-slate-100 text-slate-800 border border-slate-200 text-[11px] sm:text-xs font-mono font-bold rounded-full">HR
+                            Generalist & Tech Specialist | Marriott</span>
                     </div>
                     <div class="space-y-4 flex-grow text-slate-600 text-sm leading-relaxed">
                         <div>
                             <strong class="text-slate-900 block mb-1">The Objective:</strong>
-                            Eliminate manual time-theft and payroll data inaccuracies for a workforce of over 300 five-star associates.
+                            Eliminate manual time-theft and payroll data inaccuracies for a workforce of over 300
+                            five-star associates.
                         </div>
                         <div>
                             <strong class="text-slate-900 block mb-1">The Execution:</strong>
                             <ul class="list-disc pl-5 space-y-1.5">
-                                <li>Led physical hardware deployment and biometric enrollment across the entire luxury property.</li>
-                                <li>Seamlessly mapped terminal inputs to the primary deep-stack HRIS database (mHUB / OASys).</li>
-                                <li>Operated as ERT First Aider, securely documenting restricted medical files with zero leakage.</li>
+                                <li>Led physical hardware deployment and biometric enrollment across the entire luxury
+                                    property.</li>
+                                <li>Seamlessly mapped terminal inputs to the primary deep-stack HRIS database (mHUB /
+                                    OASys).</li>
+                                <li>Operated as ERT First Aider, securely documenting restricted medical files with zero
+                                    leakage.</li>
                             </ul>
                         </div>
                     </div>
                     <div class="mt-6 pt-4 border-t border-slate-200">
-                        <strong class="text-slate-900 block mb-1.5"><i class="fas fa-trophy text-slate-500 mr-2"></i>The Outcome</strong>
-                        <p class="text-sm text-slate-800 font-medium bg-slate-50 border border-slate-200 rounded-lg p-3">
-                            Achieved 100% automated payroll data ingestion. Earned the distinguished title of "mHUB Training Champion of the Year" (2022) for transforming workflow workflows.
+                        <strong class="text-slate-900 block mb-1.5"><i class="fas fa-trophy text-slate-500 mr-2"></i>The
+                            Outcome</strong>
+                        <p
+                            class="text-sm text-slate-800 font-medium bg-slate-50 border border-slate-200 rounded-lg p-3">
+                            Achieved 100% automated payroll data ingestion. Earned the distinguished title of "mHUB
+                            Training Champion of the Year" (2022) for transforming workflow workflows.
                         </p>
                     </div>
                 </div>
 
                 <!-- Project 4 -->
-                <div class="bg-white rounded-xl p-5 sm:p-6 md:p-8 border border-slate-200 shadow-sm card-hover transition-all duration-300 flex flex-col h-full">
+                <div
+                    class="bg-white rounded-xl p-5 sm:p-6 md:p-8 border border-slate-200 shadow-sm card-hover transition-all duration-300 flex flex-col h-full">
                     <div class="mb-4">
-                        <h3 class="text-lg sm:text-xl font-bold mb-2 text-slate-900 leading-snug">Global L&D & Talent Acquisition</h3>
-                        <span class="inline-block px-3 py-1 bg-slate-100 text-slate-800 border border-slate-200 text-[11px] sm:text-xs font-mono font-bold rounded-full">Instructional Designer | Interim HR Manager</span>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 text-slate-900 leading-snug">Global L&D & Talent
+                            Acquisition</h3>
+                        <span
+                            class="inline-block px-3 py-1 bg-slate-100 text-slate-800 border border-slate-200 text-[11px] sm:text-xs font-mono font-bold rounded-full">Instructional
+                            Designer | Interim HR Manager</span>
                     </div>
                     <div class="space-y-4 flex-grow text-slate-600 text-sm leading-relaxed">
                         <div>
                             <strong class="text-slate-900 block mb-1">The Objective:</strong>
-                            Standardize global knowledge transfer and fulfill high-volume operational staffing mandates under tight deadlines.
+                            Standardize global knowledge transfer and fulfill high-volume operational staffing mandates
+                            under tight deadlines.
                         </div>
                         <div>
                             <strong class="text-slate-900 block mb-1">The Execution:</strong>
                             <ul class="list-disc pl-5 space-y-1.5">
-                                <li>Architected Cambridge-compliant digital onboarding structures and instructional design pipelines.</li>
-                                <li>Scaled targeted, digital recruitment funnels during peak seasonal demand to fulfill mandates ahead of schedule.</li>
+                                <li>Architected Cambridge-compliant digital onboarding structures and instructional
+                                    design pipelines.</li>
+                                <li>Scaled targeted, digital recruitment funnels during peak seasonal demand to fulfill
+                                    mandates ahead of schedule.</li>
                             </ul>
                         </div>
                     </div>
                     <div class="mt-6 pt-4 border-t border-slate-200">
-                        <strong class="text-slate-900 block mb-1.5"><i class="fas fa-trophy text-slate-500 mr-2"></i>The Outcome</strong>
-                        <p class="text-sm text-slate-800 font-medium bg-slate-50 border border-slate-200 rounded-lg p-3">
-                            Achieved 100% competency rate for primary cohorts and mitigated litigation risks by maintaining strict adherence to the Ghana Labor Law Act 2003.
+                        <strong class="text-slate-900 block mb-1.5"><i class="fas fa-trophy text-slate-500 mr-2"></i>The
+                            Outcome</strong>
+                        <p
+                            class="text-sm text-slate-800 font-medium bg-slate-50 border border-slate-200 rounded-lg p-3">
+                            Achieved 100% competency rate for primary cohorts and mitigated litigation risks by
+                            maintaining strict adherence to the Ghana Labor Law Act 2003.
                         </p>
                     </div>
                 </div>
@@ -299,66 +404,88 @@
     <section id="audio" class="py-12 md:py-20 bg-slate-100 border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col sm:flex-row sm:items-center gap-4 mb-8 md:mb-12">
-                <div class="w-12 h-12 rounded-xl bg-slate-900 flex items-center justify-center shadow-md text-white text-xl flex-shrink-0">
+                <div
+                    class="w-12 h-12 rounded-xl bg-slate-900 flex items-center justify-center shadow-md text-white text-xl flex-shrink-0">
                     <i class="fas fa-sliders-h"></i>
                 </div>
                 <div>
                     <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900">Domain 3</h2>
-                    <p class="text-slate-600 font-mono text-xs sm:text-sm mt-0.5 font-semibold">Live Sound & Technical Media Production</p>
+                    <p class="text-slate-600 font-mono text-xs sm:text-sm mt-0.5 font-semibold">Live Sound & Technical
+                        Media Production</p>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
                 <!-- Project 5 -->
-                <div class="bg-white rounded-xl p-5 sm:p-6 md:p-8 border border-slate-200 shadow-sm card-hover transition-all duration-300 flex flex-col h-full">
+                <div
+                    class="bg-white rounded-xl p-5 sm:p-6 md:p-8 border border-slate-200 shadow-sm card-hover transition-all duration-300 flex flex-col h-full">
                     <div class="mb-4">
-                        <h3 class="text-lg sm:text-xl font-bold mb-2 text-slate-900 leading-snug">FOH System Engineering & Live Mastering</h3>
-                        <span class="inline-block px-3 py-1 bg-slate-100 text-slate-800 border border-slate-200 text-[11px] sm:text-xs font-mono font-bold rounded-full">FOH Engineer & Systems Integration Consultant</span>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 text-slate-900 leading-snug">FOH System Engineering
+                            & Live Mastering</h3>
+                        <span
+                            class="inline-block px-3 py-1 bg-slate-100 text-slate-800 border border-slate-200 text-[11px] sm:text-xs font-mono font-bold rounded-full">FOH
+                            Engineer & Systems Integration Consultant</span>
                     </div>
                     <div class="space-y-4 flex-grow text-slate-600 text-sm leading-relaxed">
                         <div>
                             <strong class="text-slate-900 block mb-1">The Objective:</strong>
-                            Manage and engineer large-scale indoor/outdoor digital audio environments, ensuring zero-latency sound delivery for 1,000+ attendees.
+                            Manage and engineer large-scale indoor/outdoor digital audio environments, ensuring
+                            zero-latency sound delivery for 1,000+ attendees.
                         </div>
                         <div>
                             <strong class="text-slate-900 block mb-1">The Execution:</strong>
                             <ul class="list-disc pl-5 space-y-1.5">
-                                <li>Owned the complete signal chain: managed digital consoles, optimized RF, and executed real-time mastering using Waves plugins.</li>
-                                <li>Directed musical arrangements and rehearsals for high-stakes ensembles (SAPERS Army Band & Tulips Band).</li>
+                                <li>Owned the complete signal chain: managed digital consoles, optimized RF, and
+                                    executed real-time mastering using Waves plugins.</li>
+                                <li>Directed musical arrangements and rehearsals for high-stakes ensembles (SAPERS Army
+                                    Band & Tulips Band).</li>
                             </ul>
                         </div>
                     </div>
                     <div class="mt-6 pt-4 border-t border-slate-200">
-                        <strong class="text-slate-900 block mb-1.5"><i class="fas fa-trophy text-slate-500 mr-2"></i>The Outcome</strong>
-                        <p class="text-sm text-slate-800 font-medium bg-slate-50 border border-slate-200 rounded-lg p-3">
-                            Led ensembles to 1st/3rd place district finishes and achieved zero system failures across 3 years of continuous weekly live productions.
+                        <strong class="text-slate-900 block mb-1.5"><i class="fas fa-trophy text-slate-500 mr-2"></i>The
+                            Outcome</strong>
+                        <p
+                            class="text-sm text-slate-800 font-medium bg-slate-50 border border-slate-200 rounded-lg p-3">
+                            Led ensembles to 1st/3rd place district finishes and achieved zero system failures across 3
+                            years of continuous weekly live productions.
                         </p>
                     </div>
                 </div>
 
                 <!-- Project 6 -->
-                <div class="bg-white rounded-xl p-5 sm:p-6 md:p-8 border border-slate-200 shadow-sm card-hover transition-all duration-300 flex flex-col h-full">
+                <div
+                    class="bg-white rounded-xl p-5 sm:p-6 md:p-8 border border-slate-200 shadow-sm card-hover transition-all duration-300 flex flex-col h-full">
                     <div class="mb-4">
-                        <h3 class="text-lg sm:text-xl font-bold mb-2 text-slate-900 leading-snug">The "LexyStanz" Digital Channel</h3>
-                        <span class="inline-block px-3 py-1 bg-slate-100 text-slate-800 border border-slate-200 text-[11px] sm:text-xs font-mono font-bold rounded-full">Creator, Session Musician, & Mix Engineer</span>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 text-slate-900 leading-snug">The "LexyStanz"
+                            Digital Channel</h3>
+                        <span
+                            class="inline-block px-3 py-1 bg-slate-100 text-slate-800 border border-slate-200 text-[11px] sm:text-xs font-mono font-bold rounded-full">Creator,
+                            Session Musician, & Mix Engineer</span>
                     </div>
                     <div class="space-y-4 flex-grow text-slate-600 text-sm leading-relaxed">
                         <div>
                             <strong class="text-slate-900 block mb-1">The Objective:</strong>
-                            Build a digital showcase for original composition, gear reviews, and instructional music production tutorials.
+                            Build a digital showcase for original composition, gear reviews, and instructional music
+                            production tutorials.
                         </div>
                         <div>
                             <strong class="text-slate-900 block mb-1">The Execution:</strong>
                             <ul class="list-disc pl-5 space-y-1.5">
-                                <li>Tracked, edited, and mixed original arrangements within major DAWs (Studio One, Cubase).</li>
-                                <li>Produced video tutorials breaking down complex sound engineering topics (compression, EQ sweeps, routing).</li>
+                                <li>Tracked, edited, and mixed original arrangements within major DAWs (Studio One,
+                                    Cubase).</li>
+                                <li>Produced video tutorials breaking down complex sound engineering topics
+                                    (compression, EQ sweeps, routing).</li>
                             </ul>
                         </div>
                     </div>
                     <div class="mt-6 pt-4 border-t border-slate-200">
-                        <strong class="text-slate-900 block mb-1.5"><i class="fas fa-trophy text-slate-500 mr-2"></i>The Outcome</strong>
-                        <p class="text-sm text-slate-800 font-medium bg-slate-50 border border-slate-200 rounded-lg p-3">
-                            Established an open-source digital portfolio and teaching aid for international students, proving deep proficiency in digital media logistics.
+                        <strong class="text-slate-900 block mb-1.5"><i class="fas fa-trophy text-slate-500 mr-2"></i>The
+                            Outcome</strong>
+                        <p
+                            class="text-sm text-slate-800 font-medium bg-slate-50 border border-slate-200 rounded-lg p-3">
+                            Established an open-source digital portfolio and teaching aid for international students,
+                            proving deep proficiency in digital media logistics.
                         </p>
                     </div>
                 </div>
@@ -371,95 +498,152 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-10 md:mb-16">
                 <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-slate-900">Unified Technical Arsenal</h2>
-                <p class="text-slate-600 max-w-2xl mx-auto text-sm sm:text-base font-medium">Tools, frameworks, and standards utilized across all three domains of expertise.</p>
+                <p class="text-slate-600 max-w-2xl mx-auto text-sm sm:text-base font-medium">Tools, frameworks, and
+                    standards utilized across all three domains of expertise.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
+
                 <!-- Category 1 -->
                 <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 sm:p-6 shadow-sm">
-                    <h3 class="text-slate-900 font-bold mb-4 border-b border-slate-200 pb-3 flex items-center gap-2 text-base sm:text-lg">
+                    <h3
+                        class="text-slate-900 font-bold mb-4 border-b border-slate-200 pb-3 flex items-center gap-2 text-base sm:text-lg">
                         <i class="fas fa-server text-slate-500 text-base"></i> Backend & Development
                     </h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Node.js</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Express.js</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">MongoDB</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">SQL</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">RESTful APIs</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Git/GitHub</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Custom Middleware</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Node.js</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Express.js</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">MongoDB</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">SQL</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">RESTful
+                            APIs</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Git/GitHub</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Custom
+                            Middleware</span>
                     </div>
                 </div>
 
                 <!-- Category 2 -->
                 <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 sm:p-6 shadow-sm">
-                    <h3 class="text-slate-900 font-bold mb-4 border-b border-slate-200 pb-3 flex items-center gap-2 text-base sm:text-lg">
+                    <h3
+                        class="text-slate-900 font-bold mb-4 border-b border-slate-200 pb-3 flex items-center gap-2 text-base sm:text-lg">
                         <i class="fas fa-shield-alt text-slate-500 text-base"></i> Data Security & Privacy
                     </h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">AES-256</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">RBAC</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">PrivacyOps</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">HIPAA</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Cybersecurity Ops</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">AES-256</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">RBAC</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">PrivacyOps</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">HIPAA</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Cybersecurity
+                            Ops</span>
                     </div>
                 </div>
 
                 <!-- Category 3 -->
                 <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 sm:p-6 shadow-sm">
-                    <h3 class="text-slate-900 font-bold mb-4 border-b border-slate-200 pb-3 flex items-center gap-2 text-base sm:text-lg">
+                    <h3
+                        class="text-slate-900 font-bold mb-4 border-b border-slate-200 pb-3 flex items-center gap-2 text-base sm:text-lg">
                         <i class="fas fa-sitemap text-slate-500 text-base"></i> Enterprise HRIS
                     </h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">mHUB</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">OASys</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Birch Street ERP</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Bayern</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">EnQuest</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Workday Basics</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Deel</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">mHUB</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">OASys</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Birch
+                            Street ERP</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Bayern</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">EnQuest</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Workday
+                            Basics</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Deel</span>
                     </div>
                 </div>
 
                 <!-- Category 4 -->
                 <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 sm:p-6 shadow-sm">
-                    <h3 class="text-slate-900 font-bold mb-4 border-b border-slate-200 pb-3 flex items-center gap-2 text-base sm:text-lg">
+                    <h3
+                        class="text-slate-900 font-bold mb-4 border-b border-slate-200 pb-3 flex items-center gap-2 text-base sm:text-lg">
                         <i class="fas fa-chart-line text-slate-500 text-base"></i> HR Analytics & Ops
                     </h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Predictive Attrition</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Payroll Automation</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">L2/L3 Systems Support</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Labor Law (Ghana/Cambodia)</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Predictive
+                            Attrition</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Payroll
+                            Automation</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">L2/L3
+                            Systems Support</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Labor
+                            Law (Ghana/Cambodia)</span>
                     </div>
                 </div>
 
                 <!-- Category 5 -->
                 <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 sm:p-6 shadow-sm">
-                    <h3 class="text-slate-900 font-bold mb-4 border-b border-slate-200 pb-3 flex items-center gap-2 text-base sm:text-lg">
+                    <h3
+                        class="text-slate-900 font-bold mb-4 border-b border-slate-200 pb-3 flex items-center gap-2 text-base sm:text-lg">
                         <i class="fas fa-headphones text-slate-500 text-base"></i> Audio Hardware & DAW
                     </h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Behringer X32</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Midas Consoles</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Pro Tools</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Studio One</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Cubase</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">DSP</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Behringer
+                            X32</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Midas
+                            Consoles</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Pro
+                            Tools</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Studio
+                            One</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Cubase</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">DSP</span>
                     </div>
                 </div>
 
                 <!-- Category 6 -->
                 <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 sm:p-6 shadow-sm">
-                    <h3 class="text-slate-900 font-bold mb-4 border-b border-slate-200 pb-3 flex items-center gap-2 text-base sm:text-lg">
+                    <h3
+                        class="text-slate-900 font-bold mb-4 border-b border-slate-200 pb-3 flex items-center gap-2 text-base sm:text-lg">
                         <i class="fas fa-guitar text-slate-500 text-base"></i> Musical Instruments
                     </h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Stage Pianos</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Acoustic Guitars</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Electric Guitars</span>
-                        <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Bass Guitars</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Stage
+                            Pianos</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Acoustic
+                            Guitars</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Electric
+                            Guitars</span>
+                        <span
+                            class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 rounded text-xs font-mono font-semibold shadow-sm">Bass
+                            Guitars</span>
                     </div>
                 </div>
 
@@ -473,9 +657,12 @@
             <span class="font-extrabold text-2xl tracking-wider text-white mb-2">AGYEI.</span>
             <p class="text-slate-400 text-sm mb-6 font-medium">Bridging Systems, People, and Sound.</p>
             <div class="flex space-x-6 text-slate-500 mb-8">
-                <a href="mailto:agyei22@gmail.com" class="hover:text-white transition-colors"><i class="fas fa-envelope text-xl"></i></a>
-                <a href="https://linkedin.com" target="_blank" class="hover:text-white transition-colors"><i class="fab fa-linkedin text-xl"></i></a>
-                <a href="https://github.com" target="_blank" class="hover:text-white transition-colors"><i class="fab fa-github text-xl"></i></a>
+                <a href="mailto:agyei22@gmail.com" class="hover:text-white transition-colors"><i
+                        class="fas fa-envelope text-xl"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="hover:text-white transition-colors"><i
+                        class="fab fa-linkedin text-xl"></i></a>
+                <a href="https://github.com" target="_blank" class="hover:text-white transition-colors"><i
+                        class="fab fa-github text-xl"></i></a>
             </div>
             <p class="text-slate-600 text-xs">&copy; 2026 Agyei. All rights reserved.</p>
         </div>
@@ -517,4 +704,5 @@
         });
     </script>
 </body>
+
 </html>
